@@ -1,0 +1,109 @@
+{
+  "expo": {
+    "assetBundlePatterns": ["**/*"],
+    "name": "Folio",
+    "slug": "folio",
+    "version": "1.0.0",
+    "orientation": "default",
+    "scheme": "folio",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "co.lessisbetter.folio",
+      "icon": {
+        "dark": "./assets/images/ios-dark.png",
+        "light": "./assets/images/ios-light.png",
+        "tinted": "./assets/images/ios-tinted.png"
+      },
+      "associatedDomains": ["applinks:yourapp.com"],
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        }
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "co.lessisbetter.folio",
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#fafafa",
+          "image": "./assets/images/splash-icon-light.png",
+          "dark": {
+            "image": "./assets/images/splash-icon-dark.png",
+            "backgroundColor": "#222222"
+          }
+        }
+      ],
+      ["@lovesworking/watermelondb-expo-plugin-sdk-52-plus"],
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "extraPods": [
+              {
+                "name": "simdjson",
+                "configurations": ["Debug", "Release"],
+                "path": "../node_modules/@nozbe/simdjson",
+                "modular_headers": true
+              }
+            ]
+          },
+          "android": {
+            "packagingOptions": {
+              "pickFirst": ["**/libc++_shared.so"]
+            }
+          }
+        }
+      ],
+      "expo-font",
+      "expo-web-browser",
+      "expo-localization",
+      "./plugins/withLargeHeap",
+      "./plugins/withFolioShareAndroid",
+      "./plugins/withFolioShareiOS"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "75579236-282c-4bc2-9f72-bc9ebe2f4ce2",
+        "build": {
+          "experimental": {
+            "ios": {
+              "appExtensions": [
+                {
+                  "targetName": "FolioShare",
+                  "bundleIdentifier": "co.lessisbetter.folio.FolioShare",
+                  "entitlements": {
+                    "com.apple.security.application-groups": ["group.co.lessisbetter.folio.share"]
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "owner": "lessisbetter"
+  }
+}
